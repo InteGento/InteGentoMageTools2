@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.1.0
+# MageTools2 v 0.1.1
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -13,6 +13,7 @@ CLR_RED='\033[31m'; # MESSAGE
 CLR_DEF='\033[0m'; # RESET
 
 SCRIPTSTARTDIR="$( pwd )/";
+MAGETOOLS_PROJECTPATH="$( pwd )/";
 
 ###################################
 ## Looking for a Magento Install
@@ -27,6 +28,7 @@ for (( c=1; c<=10; c++ )); do
     else
         if [ $c != 1 ]; then
             echo ". Found a Magento root dir";
+            MAGETOOLS_PROJECTPATH="$( pwd )/";
         fi;
         ismagento='y';
         break;
@@ -34,7 +36,7 @@ for (( c=1; c<=10; c++ )); do
 done
 
 if [ $ismagento == 'n' ]; then
-    cd ${SCRIPTSTARTDIR};
+    cd "${SCRIPTSTARTDIR}";
     echo "/!\\ The script could not find a Magento root dir /!\\";
     return 0;
 fi;
@@ -54,6 +56,6 @@ complete -W "${_magetools_options}" 'magetools'
 case "$1" in
     'copy' | 'cp')
         echo -e "${CLR_BLUE}## COPY${CLR_DEF}";
-        . "${SOURCEDIR}/inc/copy.sh" $2;
+        . "${SOURCEDIR}/inc/copy.sh" "${2}";
     ;;
 esac
