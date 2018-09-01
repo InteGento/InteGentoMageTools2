@@ -21,12 +21,13 @@ fi;
 
 # Get theme name
 _theme_name='';
-_themes=$(ls app/design/frontend/);
-for dir in "${_themes[@]}"; do
-    if [[ "${dir}" == 'Magento' ]];then
+_themes=($(ls app/design/frontend/));
+_dir='';
+for _dir in "${_themes[@]}"; do
+    if [[ "${_dir}" == 'Magento' ]];then
         continue;
     fi;
-    _theme_name="${dir}";
+    _theme_name=$(echo "${_dir}" | tr -cd [:alnum:]);
 done
 
 # Check if theme exists

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.1.1
+# MageTools2 v 0.1.2
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
