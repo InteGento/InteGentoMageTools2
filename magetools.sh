@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.1.2
+# MageTools2 v 0.1.3
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -53,9 +53,10 @@ complete -W "${_magetools_options}" 'magetools'
 ###################################
 
 . "${SOURCEDIR}/inc/helpers.sh";
-case "$1" in
+case "${1}" in
     'copy' | 'cp')
         echo -e "${CLR_BLUE}## COPY${CLR_DEF}";
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
     ;;
+    *) echo "Error : '${1}' is an invalid command.";
 esac

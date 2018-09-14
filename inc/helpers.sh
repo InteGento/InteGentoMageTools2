@@ -15,3 +15,9 @@ function magetools2_sed(){
     cat "${sed_tmp_file}";
     rm "${sed_tmp_file}";
 }
+
+function magetools2_uppercase(){
+    sttr="${1}";
+    sttr="$(tr '[:lower:]' '[:upper:]' <<< ${sttr:0:1})${sttr:1}";
+    echo "${sttr}";
+}

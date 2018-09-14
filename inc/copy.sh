@@ -39,18 +39,27 @@ fi;
 
 # Convert path
 ## Convert magento/module-test to Magento_test
-_newfile=$(magetools2_sed 's/magento\/module-/Magento_/g' "${_newfile}");
 
-## Convert Magento_test to Magento_Test
-_pathbefore=${_newfile%_*};
-_pathafter=${_newfile##*_};
-_newfile="${_pathbefore}_${_pathafter^}";
+# Replace /module- by delimiter
+MODULE_PATH_PARTS="${_newfile/\/module-/?}";
+
+# Uppercase for string before delimiter
+MODULE_PATH_PARTS_before=$(magetools2_uppercase ${MODULE_PATH_PARTS%\?*});
+
+# Uppercase for string after
+MODULE_PATH_PARTS_after=$(magetools2_uppercase ${MODULE_PATH_PARTS##*\?});
+
+_newfile="${MODULE_PATH_PARTS_before}_${MODULE_PATH_PARTS_after}";
 
 ## Remove vendor and infos
 _newfile=${_newfile/view\/frontend\//};
 
 # Add path
 _newfile="app/design/frontend/${_theme_name}/default/${_newfile}";
+
+echo $_newfile;
+return 0;
+
 
 if [[ -f "${_newfile}" ]]; then
     echo "${CLR_RED}- ERROR : Template already exists.${CLR_DEF}";
@@ -61,4 +70,4 @@ fi;
 magetools2_bury_copy "${_basefile}" "${_newfile}";
 echo "Success : ";
 echo "from : ${_basefile}";
-echo "to: ${_newfile}";
+echo "to : ${_newfile}";
