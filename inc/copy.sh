@@ -57,10 +57,6 @@ _newfile=${_newfile/view\/frontend\//};
 # Add path
 _newfile="app/design/frontend/${_theme_name}/default/${_newfile}";
 
-echo $_newfile;
-return 0;
-
-
 if [[ -f "${_newfile}" ]]; then
     echo "${CLR_RED}- ERROR : Template already exists.${CLR_DEF}";
     return;
