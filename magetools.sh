@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.1.3.1
+# MageTools2 v 0.2.0
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -37,7 +37,7 @@ done
 
 if [ $ismagento == 'n' ]; then
     cd "${SCRIPTSTARTDIR}";
-    echo "/!\\ The script could not find a Magento root dir /!\\";
+    echo -e "${CLR_RED}/!\\ The script could not find a Magento root dir /!\\ ${CLR_DEF}";
     return 0;
 fi;
 
@@ -55,8 +55,13 @@ complete -W "${_magetools_options}" 'magetools'
 . "${SOURCEDIR}/inc/helpers.sh";
 case "${1}" in
     'copy' | 'cp')
-        echo -e "${CLR_BLUE}## COPY${CLR_DEF}";
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
     ;;
-    *) echo "Error : '${1}' is an invalid command.";
+    'help' | *)
+        if [ ${1} != 'n' ]; then
+            echo -e "${CLR_RED}Error : '${1}' is an invalid command.${CLR_DEF}";
+        fi;
+
+        . "${SOURCEDIR}/inc/help.sh" "${2}";
+    ;;
 esac

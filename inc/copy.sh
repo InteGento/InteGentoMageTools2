@@ -3,9 +3,11 @@
 _newfile="${1}";
 _basefile="${1}";
 
+echo -e "${CLR_BLUE}## COPY${CLR_DEF}";
+
 # Check file
 if [[ "${_newfile}" == '' ]]; then
-    echo "${CLR_RED}- ERROR : No file specified.${CLR_DEF}";
+    echo -e "${CLR_RED}- ERROR : No file specified.${CLR_DEF}";
     return;
 fi;
 
@@ -15,7 +17,7 @@ _basefile="vendor/${_newfile##*vendor/}";
 
 # Check if file exists
 if [[ ! -f "${_basefile}" ]]; then
-    echo "${CLR_RED}- ERROR : Input file do not exists.${CLR_DEF}";
+    echo -e "${CLR_RED}- ERROR : Input file do not exists.${CLR_DEF}";
     return;
 fi;
 
@@ -32,7 +34,7 @@ done
 
 # Check if theme exists
 if [[ "${_theme_name}" == '' ]]; then
-    echo "${CLR_RED}- ERROR : No theme found.${CLR_DEF}";
+    echo -e "${CLR_RED}- ERROR : No theme found.${CLR_DEF}";
     return;
 fi;
 
@@ -58,7 +60,7 @@ _newfile=${_newfile/view\/frontend\//};
 _newfile="app/design/frontend/${_theme_name}/default/${_newfile}";
 
 if [[ -f "${_newfile}" ]]; then
-    echo "${CLR_RED}- ERROR : Template already exists.${CLR_DEF}";
+    echo -e "${CLR_RED}- ERROR : Template already exists.${CLR_DEF}";
     return;
 fi;
 
