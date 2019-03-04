@@ -29,6 +29,9 @@ for _dir in "${_themes[@]}"; do
     if [[ "${_dir}" == 'Magento' ]];then
         continue;
     fi;
+    if [[ "${_dir}" == 'Project' ]];then
+        continue;
+    fi;
     _theme_name=$(echo "${_dir}" | tr -cd [:alnum:]);
 done
 
