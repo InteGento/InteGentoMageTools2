@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.2.1
+# MageTools2 v 0.2.2
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -58,10 +58,9 @@ case "${1}" in
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
     ;;
     'help' | *)
-        if [ ${1} != 'n' ]; then
+        if [ "${1}" != 'n' ]; then
             echo -e "${CLR_RED}Error : '${1}' is an invalid command.${CLR_DEF}";
         fi;
-
         . "${SOURCEDIR}/inc/help.sh" "${2}";
     ;;
 esac

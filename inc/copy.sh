@@ -35,12 +35,20 @@ for _dir in "${_themes[@]}"; do
     _theme_name=$(echo "${_dir}" | tr -cd [:alnum:]);
 done
 
+_config_file="${MAGETOOLS_PROJECTPATH}/magetools-config.sh";
+if [[ -f "${_config_file}" ]];then
+    . "${_config_file}";
+fi;
+_config_file="${MAGETOOLS_PROJECTPATH}/../magetools-config.sh";
+if [[ -f "${_config_file}" ]];then
+    . "${_config_file}";
+fi;
+
 # Check if theme exists
 if [[ "${_theme_name}" == '' ]]; then
     echo -e "${CLR_RED}- ERROR : No theme found.${CLR_DEF}";
     return;
 fi;
-
 
 # Convert path
 ## Convert magento/module-test to Magento_test
