@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.2.2
+# MageTools2 v 0.3.0
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -56,6 +56,9 @@ complete -W "${_magetools_options}" 'magetools'
 case "${1}" in
     'copy' | 'cp')
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
+    ;;
+    'cache')
+        . "${SOURCEDIR}/inc/cache.sh" "${2}";
     ;;
     'help' | *)
         if [ "${1}" != 'n' ]; then
