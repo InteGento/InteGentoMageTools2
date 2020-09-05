@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.3.0
+# MageTools2 v 0.4.0
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -12,15 +12,16 @@ CLR_YELLOW='\033[33m'; # INFO
 CLR_RED='\033[31m'; # MESSAGE
 CLR_DEF='\033[0m'; # RESET
 
+SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
+TOOLSDIR="${SOURCEDIR}tools/";
 SCRIPTSTARTDIR="$( pwd )/";
-MAGETOOLS_PROJECTPATH="$( pwd )/";
 
 ###################################
 ## Looking for a Magento Install
 ###################################
 
 ismagento='n';
-SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
+MAGETOOLS_PROJECTPATH="$( pwd )/";
 for (( c=1; c<=10; c++ )); do
     if [ ! -d "app" ]; then
         cd ..;
@@ -49,6 +50,26 @@ _magetools_options='copy';
 complete -W "${_magetools_options}" 'magetools'
 
 ###################################
+## Test submodules
+###################################
+
+if [[ ! -f "${TOOLSDIR}BashUtilities/README.md" ]]; then
+    cd "${SOURCEDIR}";
+    git submodule update --init --recursive;
+    cd "${_CURRENT_DIR}";
+fi;
+
+###################################
+## Tools
+###################################
+
+. "${TOOLSDIR}BashUtilities/modules/files.sh";
+. "${TOOLSDIR}BashUtilities/modules/messages.sh";
+. "${TOOLSDIR}BashUtilities/modules/texttransform.sh";
+. "${TOOLSDIR}BashUtilities/modules/values.sh";
+. "${TOOLSDIR}BashUtilities/modules/git.sh";
+
+###################################
 ## Routing from initial argument
 ###################################
 
@@ -57,12 +78,15 @@ case "${1}" in
     'copy' | 'cp')
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
     ;;
+    'env')
+        . "${SOURCEDIR}/inc/env.sh" "${2}";
+    ;;
     'cache')
         . "${SOURCEDIR}/inc/cache.sh" "${2}";
     ;;
     'help' | *)
-        if [ "${1}" != 'n' ]; then
-            echo -e "${CLR_RED}Error : '${1}' is an invalid command.${CLR_DEF}";
+        if [[ "${1}" != 'n' && "${1}" != '' ]]; then
+            echo $(bashutilities_message "'${1}' is an invalid command." 'error');
         fi;
         . "${SOURCEDIR}/inc/help.sh" "${2}";
     ;;
