@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.4.0
+# MageTools2 v 0.5.0
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -46,7 +46,7 @@ fi;
 ## Load autocomplete
 ###################################
 
-_magetools_options='copy';
+_magetools_options='cache copy env help';
 complete -W "${_magetools_options}" 'magetools'
 
 ###################################
@@ -75,17 +75,20 @@ fi;
 
 . "${SOURCEDIR}/inc/helpers.sh";
 case "${1}" in
+    'cache')
+        . "${SOURCEDIR}/inc/cache.sh" "${2}";
+    ;;
     'copy' | 'cp')
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
+    ;;
+    'deploy')
+        . "${SOURCEDIR}/inc/deploy.sh" "${2}";
     ;;
     'env')
         . "${SOURCEDIR}/inc/env.sh" "${2}";
     ;;
-    'cache')
-        . "${SOURCEDIR}/inc/cache.sh" "${2}";
-    ;;
     'help' | *)
-        if [[ "${1}" != 'n' && "${1}" != '' ]]; then
+        if [[ "${1}" != 'n' && "${1}" != 'help' && "${1}" != '' ]]; then
             echo $(bashutilities_message "'${1}' is an invalid command." 'error');
         fi;
         . "${SOURCEDIR}/inc/help.sh" "${2}";
