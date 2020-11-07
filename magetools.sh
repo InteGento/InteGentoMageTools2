@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.5.0
+# MageTools2 v 0.5.1
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -57,6 +57,12 @@ if [[ ! -f "${TOOLSDIR}BashUtilities/README.md" ]]; then
     cd "${SOURCEDIR}";
     git submodule update --init --recursive;
     cd "${_CURRENT_DIR}";
+fi;
+
+_MAGERUN_FILE="${TOOLSDIR}n98-magerun2.phar";
+if [[ ! -f "${_MAGERUN_FILE}" ]];then
+    wget -P "${TOOLSDIR}" https://files.magerun.net/n98-magerun2.phar;
+    chmod +x "${_MAGERUN_FILE}";
 fi;
 
 ###################################

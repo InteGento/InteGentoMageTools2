@@ -34,11 +34,11 @@ php bin/magento cache:disable block_html;
 php bin/magento cache:disable full_page;
 
 echo '# FRONT-END CONFIG';
-magerun config:store:set dev/js/merge_files 0
-magerun config:store:set dev/js/enable_js_bundling 0
-magerun config:store:set dev/js/minify_files 0
-magerun config:store:set dev/css/merge_css_files 0
-magerun config:store:set dev/css/minify_files 0
+php "${_MAGERUN_FILE}" config:store:set dev/js/merge_files 0
+php "${_MAGERUN_FILE}" config:store:set dev/js/enable_js_bundling 0
+php "${_MAGERUN_FILE}" config:store:set dev/js/minify_files 0
+php "${_MAGERUN_FILE}" config:store:set dev/css/merge_css_files 0
+php "${_MAGERUN_FILE}" config:store:set dev/css/minify_files 0
 
 echo '# FLUSH CACHE';
 php bin/magento cache:flush;
