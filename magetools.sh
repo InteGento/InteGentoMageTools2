@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.5.1
+# MageTools2 v 0.6.0
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2017 Darklg
@@ -46,7 +46,7 @@ fi;
 ## Load autocomplete
 ###################################
 
-_magetools_options='cache copy env help';
+_magetools_options='cache copy dlmedia env help';
 complete -W "${_magetools_options}" 'magetools'
 
 ###################################
@@ -89,6 +89,9 @@ case "${1}" in
     ;;
     'deploy')
         . "${SOURCEDIR}/inc/deploy.sh" "${2}";
+    ;;
+    'dlmedia')
+        . "${SOURCEDIR}/inc/dlmedia.sh" "${2}";
     ;;
     'env')
         . "${SOURCEDIR}/inc/env.sh" "${2}";
