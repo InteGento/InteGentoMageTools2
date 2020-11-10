@@ -21,3 +21,18 @@ function magetools2_uppercase(){
     sttr="$(tr '[:lower:]' '[:upper:]' <<< ${sttr:0:1})${sttr:1}";
     echo "${sttr}";
 }
+
+function magetools2_check_dependencies(){
+    if [[ ! -f "${_MAGERUN_FILE}" ]];then
+        echo '# Downloading Magerun';
+        wget -P "${TOOLSDIR}" https://files.magerun.net/n98-magerun2.phar;
+        chmod +x "${_MAGERUN_FILE}";
+    fi;
+
+    if [[ ! -f "${_COMPOSER_FILE}" ]];then
+        echo '# Downloading composer';
+        curl -sS https://getcomposer.org/installer | php;
+        mv composer.phar "${TOOLSDIR}composer.phar";
+        chmod +x "${_COMPOSER_FILE}";
+    fi;
+}

@@ -16,7 +16,7 @@ rm -rf pub/static/frontend/*;
 rm -rf pub/static/backend/*;
 
 echo '# COMPOSER';
-composer install;
+php "${_COMPOSER_FILE}" install;
 
 echo '# DEVELOPER MODE';
 php bin/magento deploy:mode:set developer;

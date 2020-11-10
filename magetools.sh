@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# MageTools2 v 0.6.0
+# MageTools2 v 0.7.0
 #
 # @author      Darklg <darklg.blog@gmail.com>
-# @copyright   Copyright (c) 2017 Darklg
+# @copyright   Copyright (c) 2020 Darklg
 # @license     MIT
 
 CLR_BLUE='\033[34m'; # SECTION
@@ -15,6 +15,9 @@ CLR_DEF='\033[0m'; # RESET
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 TOOLSDIR="${SOURCEDIR}tools/";
 SCRIPTSTARTDIR="$( pwd )/";
+
+_MAGERUN_FILE="${TOOLSDIR}n98-magerun2.phar";
+_COMPOSER_FILE="${TOOLSDIR}composer.phar";
 
 ###################################
 ## Looking for a Magento Install
@@ -46,7 +49,7 @@ fi;
 ## Load autocomplete
 ###################################
 
-_magetools_options='cache copy dlmedia env help';
+_magetools_options='cache copy dlmedia env help self-update';
 complete -W "${_magetools_options}" 'magetools'
 
 ###################################
@@ -59,11 +62,7 @@ if [[ ! -f "${TOOLSDIR}BashUtilities/README.md" ]]; then
     cd "${_CURRENT_DIR}";
 fi;
 
-_MAGERUN_FILE="${TOOLSDIR}n98-magerun2.phar";
-if [[ ! -f "${_MAGERUN_FILE}" ]];then
-    wget -P "${TOOLSDIR}" https://files.magerun.net/n98-magerun2.phar;
-    chmod +x "${_MAGERUN_FILE}";
-fi;
+magetools2_check_dependencies;
 
 ###################################
 ## Tools
@@ -81,20 +80,11 @@ fi;
 
 . "${SOURCEDIR}/inc/helpers.sh";
 case "${1}" in
-    'cache')
-        . "${SOURCEDIR}/inc/cache.sh" "${2}";
+    'cache' | 'deploy' | 'dlmedia' | 'env' | 'self-update' )
+        . "${SOURCEDIR}/inc/${1}.sh" "${2}";
     ;;
     'copy' | 'cp')
         . "${SOURCEDIR}/inc/copy.sh" "${2}";
-    ;;
-    'deploy')
-        . "${SOURCEDIR}/inc/deploy.sh" "${2}";
-    ;;
-    'dlmedia')
-        . "${SOURCEDIR}/inc/dlmedia.sh" "${2}";
-    ;;
-    'env')
-        . "${SOURCEDIR}/inc/env.sh" "${2}";
     ;;
     'help' | *)
         if [[ "${1}" != 'n' && "${1}" != 'help' && "${1}" != '' ]]; then
