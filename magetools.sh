@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MageTools2 v 0.7.0
+# MageTools2 v 0.7.1
 #
 # @author      Darklg <darklg.blog@gmail.com>
 # @copyright   Copyright (c) 2020 Darklg
@@ -46,6 +46,18 @@ if [ $ismagento == 'n' ]; then
 fi;
 
 ###################################
+## Tools
+###################################
+
+. "${TOOLSDIR}BashUtilities/modules/files.sh";
+. "${TOOLSDIR}BashUtilities/modules/messages.sh";
+. "${TOOLSDIR}BashUtilities/modules/texttransform.sh";
+. "${TOOLSDIR}BashUtilities/modules/values.sh";
+. "${TOOLSDIR}BashUtilities/modules/git.sh";
+
+. "${SOURCEDIR}/inc/helpers.sh";
+
+###################################
 ## Load autocomplete
 ###################################
 
@@ -65,20 +77,9 @@ fi;
 magetools2_check_dependencies;
 
 ###################################
-## Tools
-###################################
-
-. "${TOOLSDIR}BashUtilities/modules/files.sh";
-. "${TOOLSDIR}BashUtilities/modules/messages.sh";
-. "${TOOLSDIR}BashUtilities/modules/texttransform.sh";
-. "${TOOLSDIR}BashUtilities/modules/values.sh";
-. "${TOOLSDIR}BashUtilities/modules/git.sh";
-
-###################################
 ## Routing from initial argument
 ###################################
 
-. "${SOURCEDIR}/inc/helpers.sh";
 case "${1}" in
     'cache' | 'deploy' | 'dlmedia' | 'env' | 'self-update' )
         . "${SOURCEDIR}/inc/${1}.sh" "${2}";
