@@ -24,13 +24,13 @@ echo '# SETUP UPGRADE';
 php -d memory_limit=-1 bin/magento setup:upgrade;
 
 echo '# REINDEX';
-php -d memory_limit=-1 bin/magento indexer:reindex;
+if [[ -z "${_INTEGENTO_NO_REINDEX}" ]];then
+    php -d memory_limit=-1 bin/magento indexer:reindex;
+fi;
 
 echo '# CACHE CONFIG';
 php -d memory_limit=-1 bin/magento cache:enable;
-php -d memory_limit=-1 bin/magento cache:disable layout;
-php -d memory_limit=-1 bin/magento cache:disable block_html;
-php -d memory_limit=-1 bin/magento cache:disable full_page;
+php -d memory_limit=-1 bin/magento cache:disable layout block_html full_page;
 
 echo '# FRONT-END CONFIG';
 php -d memory_limit=-1 "${_MAGERUN_FILE}" config:store:set dev/js/merge_files 0
