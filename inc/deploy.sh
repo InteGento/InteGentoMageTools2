@@ -23,8 +23,8 @@ php -d memory_limit=-1 bin/magento deploy:mode:set developer;
 echo '# SETUP UPGRADE';
 php -d memory_limit=-1 bin/magento setup:upgrade;
 
-echo '# REINDEX';
 if [[ -z "${_INTEGENTO_NO_REINDEX}" ]];then
+    echo '# REINDEX';
     php -d memory_limit=-1 bin/magento indexer:reindex;
 fi;
 
